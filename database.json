@@ -1,0 +1,11 @@
+{
+  "defaultEnv": { "ENV": "NODE_ENV" },
+  "development": {
+    "driver": "pg",
+    "host": "localhost",
+    "port": 5432,
+    "user": { "ENV": "DATABASE_USERNAME" },
+    "password": { "ENV": "DATABASE_PASSWORD" },
+    "database": { "ENV": "DATABASE_NAME" }
+  }
+}
