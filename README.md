@@ -50,6 +50,11 @@
   --location "Lisbon" --languages "Ruby,CSS"
 ```
 
+## Tech choices
+- Using `commander` as the tool to implement the command line options and arguments.
+- `db-migrate-pg` as the lib to help create and run the migrations on the database.
+- `pg-promise` as the db connector to run SQL requests. I have tried to do most request using raw SQL as I know from previous interviews this is the way Lovely Stay usually runs their code.
+
 ## Improvements
 Some types are configured as `any` as my knowledge of Typescript is not great and I'm not sure what is the exact type of an error object. Would need to refresh this topic going forward.
 
