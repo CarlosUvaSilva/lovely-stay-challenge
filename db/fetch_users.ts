@@ -8,6 +8,10 @@ interface User {
   // Add other properties if available in the database table
 }
 
+interface QueryParams {
+  [key: string]: string | string[];
+}
+
 export async function fetchUsers(
   location: string | null,
   languages: string | null
@@ -19,30 +23,29 @@ export async function fetchUsers(
     `;
 
     const conditions: string[] = [];
-    const queryParams: any[] = [];
+    const queryParams: QueryParams = {};
 
     if (languages) {
       query += `
         JOIN user_languages ul ON users.id = ul.user_id
         JOIN programming_languages pl ON ul.language_id = pl.id
       `;
+
       const languages_array = languages.split(',').map(lang => lang.trim());
-      conditions.push(`pl.name = ANY($${conditions.length + 1}::text[])`);
-      queryParams.push(languages_array);
+      conditions.push(`pl.name = ANY($/language/)`);
+      queryParams['language'] = languages_array;
     }
 
     if (location) {
-      conditions.push(`users.location ILIKE $${conditions.length + 1}`);
-      queryParams.push(`%${location}%`);
+      conditions.push(`users.location ILIKE $/location/`);
+      queryParams['location'] = `%${location}%`;
     }
-
 
     if (conditions.length > 0) {
       query += ' WHERE ' + conditions.join(' AND ');
     }
 
     const fetchedUsers: User[] = await db.any(query, queryParams);
-
     return fetchedUsers;
   } catch (error: any) {
     throw new Error(`Error fetching users": ${error.message}`);
