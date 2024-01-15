@@ -1,9 +1,17 @@
 import { db } from './index';
 
+interface User {
+  id: number;
+  username: string;
+  name: string;
+  location: string;
+  // Add other properties if available in the database table
+}
+
 export async function fetchUsers(
   location: string | null,
   languages: string | null
-) {
+): Promise<User[]>  {
   try {
     let query = `
       SELECT DISTINCT users.*
@@ -33,7 +41,7 @@ export async function fetchUsers(
       query += ' WHERE ' + conditions.join(' AND ');
     }
 
-    const fetchedUsers = await db.any(query, queryParams);
+    const fetchedUsers: User[] = await db.any(query, queryParams);
 
     return fetchedUsers;
   } catch (error: any) {
