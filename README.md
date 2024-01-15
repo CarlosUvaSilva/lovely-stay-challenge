@@ -8,7 +8,8 @@
 - set your `.env` (use .env-example as a template)
 - run `npm install` to install all necessary dependencies
 - `db-migrate up` (I am using `db-migrate-pg` to run the migration)
-- use `ts-node main.ts` to see available commands (examples will be provided in the next section)
+- run `npx tsc` to build/compile Typescript to Javascript
+- use `node build/main.js` to see available commands (examples will be provided in the next section)
 
 
 ## Examples
@@ -17,36 +18,36 @@
 
   This will save the user info and their main programming languages
 ```
-  ts-node main.ts get-user CarlosUvaSilva
+  node build/main.js get-user CarlosUvaSilva
 ```
 
 - List all saved users.
 
 ```
-  ts-node main.ts display-users
+  node build/main.js display-users
 ```
 
 - List all saved users filtered by location (this is case insensitive and uses string matching).
 
 ```
-  ts-node main.ts display-users \
+  node build/main.js display-users \
   --location "Lisbon"
 ```
 
 - List all saved users filtered by programming languages (this supports multiple languages matching all users with at least one language used).
 
 ```
-  ts-node main.ts display-users \
+  node build/main.js display-users \
   --languages "Ruby"
 ```
 ```
-  ts-node main.ts display-users \
+  node build/main.js display-users \
   --languages "Ruby,CSS"
 ```
 
 - List all saved users filtered by programming languages and location.
 ```
-  ts-node main.ts display-users \
+  node build/main.js display-users \
   --location "Lisbon" --languages "Ruby,CSS"
 ```
 
