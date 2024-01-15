@@ -5,25 +5,6 @@ export async function fetchUsers(
   languages: string | null
 ) {
   try {
-    // Giving errors with empty locations and the list filter
-    // Save user data to the database
-    // const fetchUsersQuery = `
-    //   SELECT DISTINCT(users.*)
-    //   FROM users
-    //     JOIN user_languages ul
-    //       ON users.id = ul.user_id
-    //     JOIN programming_languages pl
-    //       ON ul.language_id = pl.id
-    //   WHERE ($1 IS NULL OR users.location = $1)
-    //     AND ($2 IS NULL OR pl.name = ANY($2:list))
-    //   ORDER BY users.id
-    // `;
-
-    // const fetchedUsers = await db.manyOrNone(
-    //   fetchUsersQuery,
-    //   [location, languages]
-    // );
-
     let query = `
       SELECT DISTINCT users.*
       FROM users
