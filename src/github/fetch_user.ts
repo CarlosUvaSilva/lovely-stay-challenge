@@ -7,7 +7,7 @@ export async function fetchGithubUser(username: string) {
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      throw new Error(`Error fetching "${username}" profile: ${error.message}`);
+      throw new Error(`Error fetching ${username} profile: ${error.message}`);
     } else {
       throw error;
     }
