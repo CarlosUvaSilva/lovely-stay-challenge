@@ -32,7 +32,7 @@ export async function fetchUsers(
       `;
 
       const languages_array = languages.split(',').map(lang => lang.trim());
-      conditions.push(`pl.name = ANY($/language/)`);
+      conditions.push(`pl.name ILIKE ANY($/language/)`);
       queryParams['language'] = languages_array;
     }
 
@@ -48,6 +48,6 @@ export async function fetchUsers(
     const fetchedUsers: User[] = await db.any(query, queryParams);
     return fetchedUsers;
   } catch (error: any) {
-    throw new Error(`Error fetching users": ${error.message}`);
+    throw new Error(`Error fetching users: ${error.message}`);
   }
 }
