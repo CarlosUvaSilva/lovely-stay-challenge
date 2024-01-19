@@ -6,17 +6,22 @@ export async function saveUser(
   location: string
 ) {
   try {
+    const data = {
+      username: username,
+      name: name,
+      location: location,
+    };
     // Save user data to the database
     const insertUserQuery = `
       INSERT INTO users (username, name, location)
-      VALUES ($1, $2, $3)
+      VALUES ($/username/, $/name/, $/location/)
       ON CONFLICT (username) DO UPDATE SET
         name = EXCLUDED.name,
         location = EXCLUDED.location
       RETURNING *;
-    `;
+      `;
 
-    const savedUser = await db.one(insertUserQuery, [username, name, location]);
+    const savedUser = await db.one(insertUserQuery, data);
     return savedUser;
   } catch (error: any) {
     throw new Error(`Error saving "${name}": ${error.message}`);
