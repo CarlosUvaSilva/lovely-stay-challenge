@@ -3,6 +3,7 @@
 
 
 ## Setup
+- Project uses `node 20.8.0` (I am using `asdf` for managing versions)
 - `psql -c "CREATE ROLE lovely WITH PASSWORD 'stay' CREATEDB LOGIN SUPERUSER"`(**optional**)
 - `psql -c 'CREATE DATABASE "lovely-challenge" OWNER lovely'`(**optional**)
 - set your `.env` (use .env-example as a template)
